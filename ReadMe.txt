@@ -1,40 +1,78 @@
-========================================================================
-    CONSOLE APPLICATION : generator_napisow_cyklicznych Project Overview
-========================================================================
+Generator Napisów Cyklicznych jest programowalnym urządzeniem do generowania napisów. Posiada 26 rejestrów, oznaczonych literami od A do Z. Każdy z nich przechowuje jeden napis. Zbiór poleceń dla generatora jest następujący:
 
-AppWizard has created this generator_napisow_cyklicznych application for you.
+ZERUJ r
+usunięcie zawartości rejestru r
 
-This file contains a summary of what you will find in each of the files that
-make up your generator_napisow_cyklicznych application.
+WYPISZ r
+wpisanie na ekran zawartości rejestru r oraz znaku nowej linii  
 
+ODWROC r  
+odwrócenie kolejności napisu w rejestrze r (z ABCDE dostajemy EDCBA)  
 
-generator_napisow_cyklicznych.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+USTAW r napis
+wpisanie do rejestru r napisu napis
 
-generator_napisow_cyklicznych.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+PRZESUN r n
+przeniesienie n początkowych znaków rejestru r na jego koniec; dla A=ABCDEF PRZESUN A 2 spowoduje, że A=CDEFAB
 
-generator_napisow_cyklicznych.cpp
-    This is the main application source file.
+USUN r n
+usunięcie n początkowych znaków rejestru r
 
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
+DOKLEJ r s
+doklejenie zawartości rejestru s na koniec rejestru r; po wykonaniu tej operacji rejestr s jest zerowany
 
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named generator_napisow_cyklicznych.pch and a precompiled types file named StdAfx.obj.
+SKOPIUJ r s
+doklejenie zawartości rejestru s na koniec rejestru r; po wykonaniu tej operacji rejestr s zachowuje pierwotną wartość
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
+MIESZAJ r s
+wstawienie do rejestru r napisu zawierającego na przemian znaki z r i s, gdy zawartość jednego z rejestrów się skończy, dodajemy tylko znaki z drugiego napisu; po wykonaniu tej operacji rejestr s jest zerowany; np. dla A=ABC i B=123 wykonanie MIESZAJ A B spowoduje, że A=A1B2C3 a B=puste
+r i s oznaczają rejestry (jedną z liter od A do Z), w każdym poleceniu r będzie różne od s. Napisami będą ciągi znaków składające się z liter (dużych i małych), cyfr, nawiasów, podkreślnika (_) lub operatorów +, -, *, /.Zaraz po uruchomieniu wszystkie rejestry przechowują puste napisy. Zaimplementuj Generator Napisów Cyklicznych. 
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+Wejście
+Na wejściu podane będą polecenia dla generatora.
 
-/////////////////////////////////////////////////////////////////////////////
+Wyjście
+Na wyjściu należy wypisać kolejne wyniki operacji WYPISZ.
+Przykład
+Wejście
+USTAW A ABCDEF
+WYPISZ A
+PRZESUN A 2
+WYPISZ A
+USUN A 3
+WYPISZ A
+ODWROC A
+WYPISZ A
+ZERUJ A
+WYPISZ A
+USTAW A 123
+USTAW B 456
+DOKLEJ A B
+WYPISZ A
+USTAW B STUVWXYZ
+MIESZAJ A B
+WYPISZ A
+USTAW A *
+WYPISZ A
+SKOPIUJ B A
+DOKLEJ A B
+WYPISZ A
+SKOPIUJ B A
+DOKLEJ A B
+WYPISZ A
+SKOPIUJ B A
+DOKLEJ A B
+WYPISZ A
+
+Wyjście
+ABCDEF
+CDEFAB
+FAB
+BAF
+
+123456
+1S2T3U4V5W6XYZ
+*
+**
+****
+********
